@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# Projeto React com Vite — Exemplo de Integração com API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido como parte da disciplina de Desenvolvimento Web, com o objetivo de demonstrar o uso do React, React Router e requisições HTTP (GET e POST).
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React (criado com [Vite](https://vitejs.dev/))
+- React Router DOM — para navegação entre páginas
+- TailwindCSS — para estilização moderna e responsiva
+- Fetch API — para consumo de dados HTTP
+- JSONPlaceholder API — API pública para simular operações de GET e POST
 
-## React Compiler
+## Objetivos do Projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Criar um projeto React com Vite  
+Implementar pelo menos duas rotas (Home e Cadastro)  
+Realizar uma requisição GET (listar posts)  
+Realizar uma requisição POST (criar um novo post)  
+Aplicar estilização personalizada (TailwindCSS)  
+Layout organizado, responsivo e funcional  
 
-## Expanding the ESLint configuration
+## Estrutura das Páginas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Home:  
+  Exibe uma lista de posts obtidos da API pública `https://jsonplaceholder.typicode.com/posts`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Create:  
+  Contém um formulário que envia novos posts para a mesma API, utilizando o método **POST**.  
+  A resposta é exibida na tela para confirmar o envio.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Navbar:  
+  Menu superior com links de navegação entre as páginas.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Footer:  
+  Rodapé com informações simples sobre o autor e o ano.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Como Executar
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone o repositório ou baixe o projeto:
+  bash
+  git clone https://github.com/arsouzza/Serratec-Dev-Web-React.git
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Acesse o diretório do projeto: 
+  cd my-react-app
+
+3. Instale as dependências: 
+  npm install
+
+4. Inicie o servidor de desenvolvimento
+  npm run dev
+
+5. Acesse no navegador:
+  http://localhost:5173

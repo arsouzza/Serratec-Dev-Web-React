@@ -1,43 +1,43 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 
-
 interface Post {
-    id: number;
-    title: string;
-    body: string;
+  id: number;
+  title: string;
+  body: string;
 }
 
-
 export default function Home() {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [error, setError] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://jsonplaceholder.typicode.com/posts?_limit=9")
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao buscar posts");
+        return res.json();
+      })
+      .then((data) => setPosts(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
-    useEffect(() => {
-        setLoading(true);
-        fetch("https://jsonplaceholder.typicode.com/posts?_limit=6")
-            .then((res) => {
-                if (!res.ok) throw new Error("Erro ao buscar dados");
-                return res.json();
-            })
-            .then((data: Post[]) => setPosts(data))
-            .catch((err: Error) => setError(err.message))
-            .finally(() => setLoading(false));
-    }, []);
+  return (
+    <div className="min-h-screen bg-gray-950 text-gray-100 p-6">
+      <h1 className="text-3xl font-bold text-center text-blue-400 mb-6">
+        Lista de Posts
+      </h1>
 
+      {loading && <p className="text-center text-gray-400">Carregando...</p>}
+      {error && <p className="text-center text-red-400">{error}</p>}
 
-    return (
-        <div>
-            <h2 className="text-2xl font-bold mb-4">Posts Recentes</h2>
-            {loading && <p>Carregando...</p>}
-            {error && <p className="text-red-500">{error}</p>}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {posts.map((post) => (
-                    <Card key={post.id} title={post.title} body={post.body} />
-                ))}
-            </div>
-        </div>
-    );
+      <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        {posts.map((post) => (
+          <Card key={post.id} title={post.title} body={post.body} />
+        ))}
+      </div>
+    </div>
+  );
 }
